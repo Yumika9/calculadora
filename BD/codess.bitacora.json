@@ -1,0 +1,125 @@
+[{
+  "_id": {
+    "$oid": "67d4e4f68be89d3af9c601d6"
+  },
+  "origen": "Morelia",
+  "destino": "Uruapan",
+  "auto": "El coyote",
+  "litrosGas": 12.5,
+  "costo": 230.91,
+  "kilometrosRecorridos": 12.3,
+  "recargasCombustible": [
+    {
+      "gasolinera": {
+        "$oid": "67d4e2dc8be89d3af9c601cb"
+      },
+      "cantidadLitros": 10,
+      "tipoCombustible": "Magna",
+      "precioLitro": 23.91,
+      "subtotal": 230.91,
+      "rendimientoKml": 11.4
+    }
+  ],
+  "fecha": "2023-10-27T10:00:00.000Z",
+  "rendimientoLitro": "11.4k/L"
+},
+{
+  "_id": {
+    "$oid": "67d4e5288be89d3af9c601d8"
+  },
+  "origen": "Uruapan",
+  "destino": "Lázaro Cárdenas",
+  "auto": "El leon",
+  "litrosGas": 15,
+  "costo": 230.5,
+  "kilometrosRecorridos": 20,
+  "recargasCombustible": [
+    {
+      "gasolinera": {
+        "$oid": "67d4e2ec8be89d3af9c601cd"
+      },
+      "cantidadLitros": 10,
+      "tipoCombustible": "Magna",
+      "precioLitro": 23.5,
+      "subtotal": 230.5,
+      "rendimientoKml": 10.4
+    }
+  ],
+  "rendimientoLitro": "10.4k/L",
+  "fecha": "2023-10-28T14:30:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "67d4e5578be89d3af9c601da"
+  },
+  "origen": "Morelia",
+  "destino": "Zamora",
+  "auto": "El coyote",
+  "litrosGas": 15,
+  "costo": 230.91,
+  "kilometrosRecorridos": 20,
+  "recargasCombustible": [
+    {
+      "gasolinera": {
+        "$oid": "67d4e2dc8be89d3af9c601cb"
+      },
+      "cantidadLitros": 10,
+      "tipoCombustible": "Magna",
+      "precioLitro": 23.91,
+      "subtotal": 230.91,
+      "rendimientoKml": 11.5
+    }
+  ],
+  "rendimientoLitro": "11.5k/L",
+  "fecha": "2023-10-29T09:15:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "67d4e5928be89d3af9c601dc"
+  },
+  "origen": "Pátzcuaro",
+  "destino": "Morelia",
+  "auto": "Flamint Hot",
+  "litrosGas": 10,
+  "costo": 230.91,
+  "kilometrosRecorridos": 15,
+  "recargasCombustible": [
+    {
+      "gasolinera": {
+        "$oid": "67d4e2dc8be89d3af9c601cb"
+      },
+      "cantidadLitros": 10,
+      "tipoCombustible": "Magna",
+      "precioLitro": 23.91,
+      "subtotal": 230.91,
+      "rendimientoKml": 11.5
+    }
+  ],
+  "rendimientoLitro": "11.5k/L",
+  "fecha": "2023-10-30T16:45:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "67d4e5c58be89d3af9c601de"
+  },
+  "origen": "Zamora",
+  "destino": "Uruapan",
+  "auto": "La Reina",
+  "litrosGas": 5,
+  "costo": 230.85,
+  "kilometrosRecorridos": 7,
+  "recargasCombustible": [
+    {
+      "gasolinera": {
+        "$oid": "67d4e30b8be89d3af9c601d1"
+      },
+      "cantidadLitros": 5,
+      "tipoCombustible": "Magna",
+      "precioLitro": 23.85,
+      "subtotal": 230.85,
+      "rendimientoKml": 7.5
+    }
+  ],
+  "rendimientoLitro": "7.5k/L",
+  "fecha": "2023-10-31T12:00:00.000Z"
+}]

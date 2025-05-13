@@ -1,0 +1,70 @@
+[{
+  "_id": {
+    "$oid": "67d4e0958be89d3af9c601c0"
+  },
+  "marca": "Toyota",
+  "alias": "El coyote",
+  "estatus": true,
+  "usuario": "Laura Martínez",
+  "capacidadTanque": 10,
+  "cilindraje": 4,
+  "modelo": "RZ1",
+  "rendimientoGasolina": "12.8k/l",
+  "tipoCombustible": "Gasolina"
+},
+{
+  "_id": {
+    "$oid": "67d4e0bc8be89d3af9c601c2"
+  },
+  "marca": "Honda",
+  "alias": "El leon",
+  "estatus": true,
+  "usuario": "Ana Pérez",
+  "capacidadTanque": 10,
+  "cilindraje": 6,
+  "modelo": "FGT1",
+  "rendimientoGasolina": "12.8k/l",
+  "tipoCombustible": "Gasolina"
+},
+{
+  "_id": {
+    "$oid": "67d4e0e48be89d3af9c601c4"
+  },
+  "marca": "Ford",
+  "alias": "Chola",
+  "estatus": false,
+  "usuario": "Juan García",
+  "capacidadTanque": 10,
+  "cilindraje": 8,
+  "modelo": "Ranger",
+  "rendimientoGasolina": "13.8k/l",
+  "tipoCombustible": "Gasolina"
+},
+{
+  "_id": {
+    "$oid": "67d4e1068be89d3af9c601c6"
+  },
+  "marca": "Chevrolet",
+  "alias": "Flamint Hot",
+  "estatus": true,
+  "usuario": "Miguel López",
+  "capacidadTanque": 10,
+  "cilindraje": 4,
+  "modelo": "T40",
+  "rendimientoGasolina": "12.8k/l",
+  "tipoCombustible": "Gasolina"
+},
+{
+  "_id": {
+    "$oid": "67d4e1208be89d3af9c601c8"
+  },
+  "marca": "BMW",
+  "alias": "La Reina",
+  "estatus": true,
+  "usuario": "Sofia Rodriguez",
+  "capacidadTanque": 15,
+  "cilindraje": 8,
+  "modelo": "HGKA",
+  "rendimientoGasolina": "11.5k/l",
+  "tipoCombustible": "Gasolina"
+}]

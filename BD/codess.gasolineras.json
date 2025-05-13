@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "67d4e2dc8be89d3af9c601cb"
+  },
+  "nombre": "Gasolinera Chuy Mora",
+  "municipio": "Morelia",
+  "estado": "Michoacan",
+  "direccion": "La rinconada",
+  "combustibles": [
+    {
+      "nombre": "Gasolina Magna",
+      "precio": 23.91
+    },
+    {
+      "nombre": "Gasolina Premium",
+      "precio": 25.59
+    }
+  ],
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "67d4e2ec8be89d3af9c601cd"
+  },
+  "nombre": "Gasolinera Uruapan Av",
+  "municipio": "Uruapan",
+  "estado": "Michoacan",
+  "direccion": "Uruapan av 203",
+  "combustibles": [
+    {
+      "nombre": "Gasolina Magna",
+      "precio": 23.5
+    },
+    {
+      "nombre": "Gasolina Premium",
+      "precio": 24.14
+    }
+  ],
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "67d4e2ff8be89d3af9c601cf"
+  },
+  "nombre": "Gasolinera Lazaro C.",
+  "municipio": "Lázaro Cárdenas",
+  "estado": "Jalisco",
+  "direccion": "Calle Emiliano Zapata 234",
+  "combustibles": [
+    {
+      "producto": "Gasolina Magna",
+      "precio": 23.77
+    },
+    {
+      "producto": "Gasolina Premium",
+      "precio": 25
+    }
+  ],
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "67d4e30b8be89d3af9c601d1"
+  },
+  "nombre": "Gasolinera Zamora",
+  "municipio": "Zamora",
+  "estado": "Michoacan",
+  "direccion": "5 de mayo 1234",
+  "combustibles": [
+    {
+      "nombre": "Gasolina Magna",
+      "precio": 23.85
+    },
+    {
+      "nombre": "Gasolina Premium",
+      "precio": 25.3
+    }
+  ],
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "67d4e3178be89d3af9c601d3"
+  },
+  "nombre": "Gasolinera Patzcuaro",
+  "municipio": "Pátzcuaro",
+  "estado": "Michoacan",
+  "direccion": "Av Nueva villa 1037",
+  "combustibles": [
+    {
+      "nombre": "Gasolina Magna",
+      "precio": 23.6
+    },
+    {
+      "nombre": "Gasolina Premium",
+      "precio": 24.9
+    }
+  ],
+  "estatus": true
+}]

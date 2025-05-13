@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "67d4dead8be89d3af9c601b4"
+  },
+  "nombre": "Ana Pérez",
+  "email": "ana.perez@example.com",
+  "password": "P@$$wOrd1",
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "67d4dec68be89d3af9c601b7"
+  },
+  "nombre": "Juan García",
+  "email": "juan.garcia@example.com",
+  "password": "jGarcia123",
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "67d4ded78be89d3af9c601b9"
+  },
+  "nombre": "Sofia Rodriguez",
+  "email": "sofia.rodriguez@example.com",
+  "password": "SofiaR123",
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "67d4dee48be89d3af9c601bb"
+  },
+  "nombre": "Miguel López",
+  "email": "miguel.lopez@example.com",
+  "password": "MiguelLopez2023",
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "67d4def38be89d3af9c601bd"
+  },
+  "nombre": "Laura Martínez",
+  "email": "laura.martinez@example.com",
+  "password": "LauraM987",
+  "estatus": true
+}]
