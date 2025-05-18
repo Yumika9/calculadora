@@ -2,7 +2,7 @@ from datetime import datetime
 
 from dao.autoDao import AutoDAO
 from dao.gasolinerasDao import GasolineraDAO
-from model.bitacoraModel import BitacoraInsert, RecargasCombustible, BitacoraSalida
+from model.bitacoraModel import BitacoraInsert, RecargasCombustible, BitacoraSalida, BitacoraSalidaAuto
 from model.usuariosModel import Salida
 from fastapi.encoders import jsonable_encoder
 
@@ -58,59 +58,45 @@ class BitacoraDAO:
     def consultaDestino(self, destino: str):
         salida = BitacoraSalida(estatus="", mensaje="", viajes=[])
         try:
-            # Usamos la vista ya creada en MongoDB
-            listatmp = list(self.db.ConsultaPorDestino.find({"destino": {"$regex": f"{destino}", "$options": "i"}}))
+            listatmp = list(self.db.bitacoraView.find({"destino": destino}))
             lista = []
             for p in listatmp:
-                # Convertir idBitacora a string si viene como ObjectId
-                if "_id" in p:
-                    print("encontre algo")
-                    p["idBitacora"] = str(p["_id"])
+                p["idBitacora"] = str(p["idBitacora"])
                 lista.append(p)
             salida.estatus = "OK"
-            salida.mensaje = f"{len(lista)} viaje(s) encontrados con destino '{destino}'."
+            salida.mensaje = f"Viaje(s) encontrados con destino a '{destino}'."
             salida.viajes = lista
         except Exception as e:
-            print("Error en consulta_por_destino:", e)
+            print(e)
             salida.estatus = "ERROR"
             salida.mensaje = "Error al consultar por destino."
         return salida
 
-    def consultaAuto(self, auto: str):
-        salida = BitacoraSalida(estatus="", mensaje="", viajes=[])
+    def consultaAuto(self, auto: str = None, marca: str = None, modelo: str = None):
+        salida = BitacoraSalidaAuto(estatus="", mensaje="", viajes=[])
         try:
-            # Filtramos en la vista por la propiedad marca o modelo dentro del array auto
-            autos_coincidentes = list(self.db.auto.find({
-                "$or": [
-                    {"marca": {"$regex": auto, "$options": "i"}},
-                    {"modelo": {"$regex": auto, "$options": "i"}},
-                    {"alias": {"$regex": auto, "$options": "i"}}
-                ]
-            }))
-            # Obtener los alias de los autos encontrados
-            alias_autos = [a["alias"] for a in autos_coincidentes if "alias" in a]
-
-            # Buscar en bitacora los viajes con esos autos
-            listatmp = list(self.db.bitacora.find({"auto": {"$in": alias_autos}}))
-
-            lista = []
-            for p in listatmp:
-                if "_id" in p:
-                    p["idBitacora"] = str(p["_id"])
-                # Agregar información del auto
-                auto_info = next((a for a in autos_coincidentes if a.get("alias") == p["auto"]), None)
-                if auto_info:
-                    p["auto_info"] = {
-                        "marca": auto_info.get("marca", ""),
-                        "modelo": auto_info.get("modelo", "")
-                    }
-                lista.append(p)
-
-            salida.estatus = "OK"
-            salida.mensaje = f"{len(lista)} viaje(s) encontrados para auto '{auto}'."
-            salida.viajes = lista
+            filtro = {}
+            if auto:
+                filtro["auto.idAuto"] = auto
+            if marca:
+                filtro["auto.marca"] = marca
+            if modelo:
+                filtro["auto.modelo"] = modelo
+            listatmp = list(self.db.autoNView.find(filtro))
+            if listatmp:
+                lista = []
+                for p in listatmp:
+                    p["idBitacora"] = str(p["idBitacora"])
+                    lista.append(p)
+                salida.estatus = "OK"
+                salida.mensaje = "Viajes encontrados."
+                salida.viajes = lista
+            else:
+                salida.estatus = "OK"
+                salida.mensaje = "No se encontraron viajes con los criterios dados."
         except Exception as e:
-            print("Error en consulta_por_auto:", e)
+            print("Error en consultaAuto:", e)
             salida.estatus = "ERROR"
             salida.mensaje = "Error al consultar por auto."
+
         return salida

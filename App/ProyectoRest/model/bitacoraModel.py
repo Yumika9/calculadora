@@ -38,3 +38,27 @@ class BitacoraSelect(BaseModel):
 
 class BitacoraSalida(Salida):
     viajes:list[BitacoraSelect]
+
+#Modelo para Consulta por Auto
+class Auto(BaseModel):
+    idAuto:str
+    marca:str
+    modelo:str
+    capacidadTanque: int
+    cilindraje: int
+    rendimientoGasolina: str
+    tipoCombustible: str
+
+class BitacoraAuto(BaseModel):
+    idBitacora: str
+    origen: str
+    destino: str
+    litrosGas: int
+    costo: int
+    kilometrosRecorridos: int
+    fecha: datetime | None = datetime.today()
+    rendimientoLitro: str
+    auto: Auto
+
+class BitacoraSalidaAuto(Salida):
+    viajes:list[BitacoraAuto]
