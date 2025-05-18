@@ -16,3 +16,13 @@ async def agregarBitacora(bitacora:BitacoraInsert,request: Request) -> Salida:
 async def consultaGeneral(request: Request)->BitacoraSalida:
     bitacoraDao= BitacoraDAO(request.app.db)
     return bitacoraDao.consultaGeneral()
+
+@router.get("/{id_auto}", response_model=BitacoraSalida, summary="Consulta por ID de Auto")
+async def consultaAuto(id_auto: str, request: Request) -> BitacoraSalida:
+    bitacoraDao = BitacoraDAO(request.app.db)
+    return bitacoraDao.consultaAuto(id_auto)
+
+@router.get("/{destino}", response_model=BitacoraSalida, summary="Consulta por Destino")
+async def consultaDestino(destino: str, request: Request) -> BitacoraSalida:
+    bitacoraDao = BitacoraDAO(request.app.db)
+    return bitacoraDao.consultaDestino(destino)
