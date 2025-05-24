@@ -1,4 +1,4 @@
-from pydantic import  BaseModel
+from pydantic import  BaseModel, Field
 
 
 class UsuarioInsert(BaseModel):
@@ -6,6 +6,7 @@ class UsuarioInsert(BaseModel):
     email: str
     password: str
     estatus: bool = True
+    tipo:str
 
 class Salida(BaseModel):
     estatus:str
@@ -13,3 +14,18 @@ class Salida(BaseModel):
 
 class UsuarioBaja(BaseModel):
     motivoBaja:str
+
+class Login(BaseModel):
+    email:str
+    password:str
+
+class Usuario(BaseModel):
+    idUsuario:int = Field(alias="_id")
+    nombre: str
+    email: str
+    password: str
+    estatus: bool = True
+    tipo: str
+
+class UsuarioSalida(Salida):
+    usuario:Usuario | None =None
