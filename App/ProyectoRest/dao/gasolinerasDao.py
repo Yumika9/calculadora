@@ -2,6 +2,7 @@
 from datetime import datetime
 
 from model.bitacoraModel import BitacoraInsert, RecargasCombustible
+from model.gasolineraModel import GasolineraInsert, GasolineraBaja, GasolineraSalida
 from model.usuariosModel import Salida
 from fastapi.encoders import jsonable_encoder
 from bson import  ObjectId
@@ -18,3 +19,90 @@ class GasolineraDAO:
         except:
             respuesta = False
         return respuesta
+
+    def agregarGasolinera(self, gasolinera: GasolineraInsert):
+        salida = Salida(estatus="", mensaje="")
+        try:
+            self.db.gasolineras.insert_one(jsonable_encoder(gasolinera))
+            salida.estatus = "OK"
+            salida.mensaje = "Gasolinera agregada con exito. "
+        except Exception as e:
+            print(e)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error al agregar una nueva gasolinera, consulta al administrador."
+        return salida
+
+    def modificarGasolinera(self,idGas:str, gasolinera: GasolineraInsert):
+        salida = Salida(estatus="", mensaje="")
+        try:
+            identificador = self.db.gasolineras.find_one({"_id":ObjectId(idGas), "estatus": True})
+            if identificador:
+                    self.db.gasolineras.update_one( {"_id": ObjectId(idGas)},
+                                             {"$set": {"nombre":gasolinera.nombre,
+                                                       "municipio":gasolinera.municipio,
+                                                       "estado":gasolinera.estado,
+                                                       "direccion":gasolinera.direccion,
+                                                       "combustibles":[c.dict() for c in gasolinera.combustibles]}})
+                    salida.estatus = "OK"
+                    salida.mensaje = "Gasolinera actualizada con exito"
+            else:
+                salida.estatus = "ERROR"
+                salida.mensaje = "El Gasolinera no existe o esta inactivo."
+        except Exception as e:
+            print(e)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error al actualizar gasolinera, consulta al administrador."
+        return salida
+
+    def eliminarGasolinera(self,idGas:str, gasolinera:GasolineraBaja ):
+        salida = Salida(estatus="", mensaje="")
+        try:
+            identificador = self.db.gasolineras.find_one({"_id": ObjectId(idGas)})
+            if identificador:
+                estado = self.db.gasolineras.find_one({"_id": ObjectId(idGas)}, projection={"estatus": True})
+                if estado:
+                    self.db.gasolineras.update_one({"_id": ObjectId(idGas)},
+                                            {"$set": {"estatus": False, "motivoBaja":gasolinera.motivoBaja}})
+                    salida.estatus = "OK"
+                    salida.mensaje = "La gasolinera se dio de baja correctamente."
+                else:
+                    salida.estatus = "ERROR"
+                    salida.mensaje = "La gasolinera no esta activa."
+            else:
+                salida.estatus = "ERROR"
+                salida.mensaje = "La gasolinera no existe."
+        except Exception as e:
+            print(e)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error al dar de baja la gasolinera, consulta al administrador."
+        return salida
+
+    def consultaGeneral(self):
+        salida = GasolineraSalida(estatus="",mensaje="",gasolineras=[])
+        try:
+            listatmp = list(self.db.gasolineraView.find())
+            lista = []
+            for p in listatmp:
+                p['idGasolinera']=str(p['idGasolinera'])
+                lista.append(p)
+            salida.estatus ="OK"
+            salida.mensaje = "Consulta general de Gasolineras."
+            salida.gasolineras = lista
+        except Exception as e:
+            print(e)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error al consultar las gasolineras."
+        return salida
+
+    def consultaIndividual(self, idGas: str):
+        salida = GasolineraSalida(estatus="",mensaje="",gasolineras=[])
+        try:
+            result = self.db.gasolineraView.find_one({"idGasolinera": idGas})
+            salida.estatus = "OK"
+            salida.mensaje = "Gasolinera encontrado."
+            salida.gasolineras = result
+        except Exception as e:
+            print(e)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error en la consulta individual, la gasolinera no existe."
+        return salida

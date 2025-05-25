@@ -19,7 +19,6 @@ async def agregarAuto(autos:AutoInsert,request: Request, respuesta:UsuarioSalida
     else:
         raise HTTPException(status_code=404, detail="Sin autorizacion.")
 
-
 @router.put("/{idAuto}/modificar", summary="Editar Auto", response_model=Salida)
 async def modificarAuto(idAuto:str,auto:AutoInsert,request: Request, respuesta:UsuarioSalida=Depends(validarUsuario)) -> Salida:
     usuario = respuesta.usuario

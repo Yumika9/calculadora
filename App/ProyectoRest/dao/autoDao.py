@@ -23,9 +23,14 @@ class AutoDAO:
     def agregarAuto(self, auto: AutoInsert):
         salida = Salida(estatus="", mensaje="")
         try:
-           self.db.auto.insert_one(jsonable_encoder(auto))
-           salida.estatus = "OK"
-           salida.mensaje = "Vehiculo agregado con exito. "
+            usuario = self.db.user.find_one({"_id":ObjectId(auto.usuario)})
+            if usuario:
+               self.db.auto.insert_one(jsonable_encoder(auto))
+               salida.estatus = "OK"
+               salida.mensaje = "Vehiculo agregado con exito. "
+            else:
+                salida.estatus = "ERROR"
+                salida.mensaje = "El usuario no existe. "
         except Exception as e:
             print(e)
             salida.estatus = "ERROR"
@@ -81,7 +86,7 @@ class AutoDAO:
         except Exception as e:
             print(e)
             salida.estatus = "ERROR"
-            salida.mensaje = "Error al vehiculo usuario, consulta al administrador."
+            salida.mensaje = "Error al dar de baja el vehiculo, consulta al administrador."
         return salida
 
     def consultaGeneral(self):

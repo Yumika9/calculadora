@@ -78,6 +78,6 @@ class UsuarioDAO:
         except Exception as e:
             print(e)
             salida.estatus = "ERROR"
-            salida.mensaje = "Error al eliminar usuario, consulta al administrador."
+            salida.mensaje = "Error al dar de baja al usuario, consulta al administrador."
         return salida
 
