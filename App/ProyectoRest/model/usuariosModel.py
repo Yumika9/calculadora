@@ -1,11 +1,20 @@
 from pydantic import  BaseModel, Field
 
+from typing import Optional
 
 class UsuarioInsert(BaseModel):
     nombre: str
     email: str
     password: str
-    estatus: bool = True
+    estatus: bool
+    tipo:str
+class CambiarContra(BaseModel):
+    password: str
+
+class EditarUser(BaseModel):
+    email: str
+    password: str
+    estatus: bool
     tipo:str
 
 class Salida(BaseModel):
@@ -19,13 +28,16 @@ class Login(BaseModel):
     email:str
     password:str
 
+#Usuario Publico:
 class Usuario(BaseModel):
-    idUsuario:int = Field(alias="_id")
+    idUsuario: str
     nombre: str
     email: str
-    password: str
-    estatus: bool = True
-    tipo: str
+    tipo:str
 
 class UsuarioSalida(Salida):
-    usuario:Usuario | None =None
+    usuario:Optional[Usuario] = None
+
+#Para las consultas
+class UsuarioSalidaR(Salida):
+    usuarioR:list[Usuario]

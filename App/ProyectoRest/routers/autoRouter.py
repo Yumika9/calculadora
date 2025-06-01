@@ -39,8 +39,8 @@ async def eliminarAuto(idAuto:str,autoB:AutoBaja,request: Request, respuesta:Usu
 
 @router.get("/auto/consulta", response_model=AutoSalida, summary="Consulta General")
 async def consultaGeneral(request: Request, respuesta:UsuarioSalida=Depends(validarUsuario))->AutoSalida:
-    usuario = respuesta.usuario
-    if (respuesta.estatus == 'OK' and usuario['tipo'] == 'Administrador'):
+    usuario = respuesta.usuario[0]
+    if (respuesta.estatus == 'OK' and usuario[0].tipo == 'Administrador'):
         autoDao = AutoDAO(request.app.db)
         return autoDao.consultaGeneral()
     else:
