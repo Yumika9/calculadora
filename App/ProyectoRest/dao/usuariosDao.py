@@ -87,6 +87,31 @@ class UsuarioDAO:
             salida.mensaje = "Error al modificar al usuario."
         return salida
 
+    def modificarUser(self, idUser: str, user: EditarUser):
+        salida = Salida(estatus="", mensaje="")
+        try:
+            datos= self.db.user.find_one({"_id":ObjectId(idUser)})
+            if datos:
+                usuario={}
+                usuario["email"] = datos["email"] if user.email == "string" else user.email
+                usuario["password"] = datos["password"] if user.password == "string" else user.password
+                usuario["tipo"] = datos["tipo"] if user.tipo == "string" else user.tipo
+
+                self.db.user.update_one(
+                    {"_id": ObjectId(idUser)},
+                    {"$set": usuario}
+                )
+                salida.estatus = "OK"
+                salida.mensaje = "Usuario Actualizado con Exito."
+            else:
+                salida.estatus = "ERROR"
+                salida.mensaje = "El usuario con ese ID no existe."
+        except Exception as e:
+            print(e)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error al modificar al usuario."
+        return salida
+
     def eliminarUsuario(self,idUser:str, usuario:UsuarioBaja):
         salida = Salida(estatus="", mensaje="")
         try:

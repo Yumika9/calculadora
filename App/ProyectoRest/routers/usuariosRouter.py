@@ -35,10 +35,18 @@ async def modificarPasswrd(idUser: str,key:CambiarContra, request: Request,respu
         return usuarioDao.modificarPasswrd(idUser, key,tipor)
     else:
         raise HTTPException(status_code=403, detail="Sin autorización.")
+@router.put("/{idUser}/editar", summary="Editar datos de Usuario", response_model=Salida)
+async def modificarUser(idUser: str,user:EditarUser, request: Request,respuesta: UsuarioSalida = Depends(validarUsuario)) -> Salida:
+    tipor = respuesta.usuario
+    if respuesta.estatus == 'OK' and tipor.tipo == "Administrador":
+        usuarioDao = UsuarioDAO(request.app.db)
+        return usuarioDao.modificarUser(idUser, user)
+    else:
+        raise HTTPException(status_code=403, detail="Sin autorización.")
 @router.delete("/{idUser}/eliminar",response_model=Salida,summary="Eliminar Usuario")
 async def eliminarUsuario(idUser:str,usuarioB:UsuarioBaja,request: Request, respuesta:UsuarioSalida=Depends(validarUsuario)) -> Salida:
     usuario = respuesta.usuario
-    if (respuesta.estatus == 'OK' and usuario['tipo'] == 'Administrador'):
+    if (respuesta.estatus == 'OK' and usuario.tipo == 'Administrador'):
         usuarioDao = UsuarioDAO(request.app.db)
         return usuarioDao.eliminarUsuario(idUser, usuarioB)
     else:

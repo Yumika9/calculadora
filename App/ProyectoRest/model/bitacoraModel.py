@@ -9,9 +9,9 @@ class RecargasCombustible(BaseModel):
     gasolinera: str
     cantidadLitros:int
     tipoCombustible:str
-    precioLitro:int
-    subtotal:int
-    rendimientoKml:int
+    precioLitro: float
+    subtotal:float
+    rendimientoKml:float
 
 class BitacoraInsert(BaseModel):
     origen: str
@@ -41,7 +41,6 @@ class BitacoraSalida(Salida):
 
 #Modelo para Consulta por Auto
 class Auto(BaseModel):
-    idAuto:str
     marca:str
     modelo:str
     capacidadTanque: int
@@ -50,7 +49,6 @@ class Auto(BaseModel):
     tipoCombustible: str
 
 class BitacoraAuto(BaseModel):
-    idBitacora: str
     origen: str
     destino: str
     litrosGas: int

@@ -20,21 +20,33 @@ class AutoDAO:
             respuesta = False
         return respuesta
 
-    def agregarAuto(self, auto: AutoInsert):
+    def agregarAuto(self, idUser: str, auto: AutoInsert):
         salida = Salida(estatus="", mensaje="")
         try:
-            usuario = self.db.user.find_one({"_id":ObjectId(auto.usuario)})
+            usuario = self.db.user.find_one({"_id": ObjectId(idUser)})
             if usuario:
-               self.db.auto.insert_one(jsonable_encoder(auto))
-               salida.estatus = "OK"
-               salida.mensaje = "Vehiculo agregado con exito. "
+                autos = {
+                    "usuario": ObjectId(idUser),
+                    "marca": auto.marca,
+                    "modelo": auto.modelo,
+                    "alias": auto.alias,
+                    "cilindraje": auto.cilindraje,
+                    "capacidadTanque": auto.capacidadTanque,
+                    "rendimientoGasolina": auto.rendimientoGasolina,
+                    "tipoCombustible": "Gasolina",
+                    "estatus": True
+                }
+                self.db.auto.insert_one(autos)
+
+                salida.estatus = "OK"
+                salida.mensaje = "Vehículo agregado con éxito."
             else:
                 salida.estatus = "ERROR"
-                salida.mensaje = "El usuario no existe. "
+                salida.mensaje = "El usuario no existe."
         except Exception as e:
             print(e)
             salida.estatus = "ERROR"
-            salida.mensaje = "Error al agregar vehiculo, consulta al administrador."
+            salida.mensaje = "Error al agregar vehículo, consulta al administrador."
         return salida
 
     def modificarAuto(self,idAuto:str, auto:AutoInsert):

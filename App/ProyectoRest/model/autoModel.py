@@ -6,7 +6,6 @@ from model.usuariosModel import Salida
 
 
 class AutoInsert(BaseModel):
-    usuario:str
     marca:str
     modelo:str
     alias:str

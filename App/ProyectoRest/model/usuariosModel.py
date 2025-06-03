@@ -14,8 +14,8 @@ class CambiarContra(BaseModel):
 class EditarUser(BaseModel):
     email: str
     password: str
-    estatus: bool
-    tipo:str
+    estatus:str
+    tipo: str
 
 class Salida(BaseModel):
     estatus:str

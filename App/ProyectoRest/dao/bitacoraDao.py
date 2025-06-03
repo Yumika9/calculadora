@@ -5,7 +5,7 @@ from dao.gasolinerasDao import GasolineraDAO
 from model.bitacoraModel import BitacoraInsert, RecargasCombustible, BitacoraSalida, BitacoraSalidaAuto
 from model.usuariosModel import Salida
 from fastapi.encoders import jsonable_encoder
-
+from bson import  ObjectId
 
 class BitacoraDAO:
     def __init__(self, db):
@@ -38,6 +38,33 @@ class BitacoraDAO:
             salida.mensaje = "Error al agregar pedido, consulta al administrador."
         return salida
 
+    def agregarRecarga(self,idBit,recarga:RecargasCombustible):
+        salida = Salida(estatus="", mensaje="")
+        try:
+            bitacora= self.db.bitacora.find_one({"_id":ObjectId(idBit)})
+            if bitacora:
+                self.db.bitacora.update_one({"_id":ObjectId(idBit)},
+                                            {"$push": {
+                                                "recargasCombustible": {
+                                                    "gasolinera": ObjectId(recarga.gasolinera),
+                                                    "cantidadLitros": recarga.cantidadLitros,
+                                                    "tipoCombustible": recarga.tipoCombustible,
+                                                    "precioLitro": recarga.precioLitro,
+                                                    "subtotal": recarga.subtotal,
+                                                    "rendimientoKml": recarga.rendimientoKml
+                                                }
+                                            }})
+                salida.estatus = "OK"
+                salida.mensaje = "Se agrego la recarga con exito."
+            else:
+                salida.estatus = "ERROR"
+                salida.mensaje = "La bitacora no existe."
+        except Exception as e:
+            print(e)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error al agregar pedido, consulta al administrador."
+        return salida
+
     def consultaGeneral(self):
         salida = BitacoraSalida(estatus="",mensaje="",viajes=[])
         try:
@@ -55,48 +82,46 @@ class BitacoraDAO:
             salida.mensaje = "Error al consultar la bitacora"
         return salida
 
-    def consultaDestino(self, destino: str):
+    def consultaDestino(self, origen: str,destino:str):
         salida = BitacoraSalida(estatus="", mensaje="", viajes=[])
         try:
-            listatmp = list(self.db.bitacoraView.find({"destino": destino}))
+            print(origen,"-",destino)
+            listatmp = list(self.db.bitaRuView.find({"origen": origen,"destino":destino}))
             lista = []
             for p in listatmp:
-                p["idBitacora"] = str(p["idBitacora"])
                 lista.append(p)
             salida.estatus = "OK"
-            salida.mensaje = f"Viaje(s) encontrados con destino a '{destino}'."
+            salida.mensaje = f"Viajes encontrados: '{origen}-{destino}'."
             salida.viajes = lista
         except Exception as e:
             print(e)
             salida.estatus = "ERROR"
-            salida.mensaje = "Error al consultar por destino."
+            salida.mensaje = "No existe un viaje con esa ruta."
         return salida
 
-    def consultaAuto(self, auto: str = None, marca: str = None, modelo: str = None):
+    def consultaAuto(self, marca:str,modelo:str, auto: str = None):
         salida = BitacoraSalidaAuto(estatus="", mensaje="", viajes=[])
         try:
-            filtro = {}
+            print(marca,modelo)
+            filtro = {
+                "auto.marca": marca,
+                "auto.modelo": modelo
+            }
             if auto:
                 filtro["auto.idAuto"] = auto
-            if marca:
-                filtro["auto.marca"] = marca
-            if modelo:
-                filtro["auto.modelo"] = modelo
-            listatmp = list(self.db.autoNView.find(filtro))
+            listatmp = list(self.db.autoBView.find(filtro))
+            lista = []
             if listatmp:
-                lista = []
                 for p in listatmp:
-                    p["idBitacora"] = str(p["idBitacora"])
                     lista.append(p)
                 salida.estatus = "OK"
                 salida.mensaje = "Viajes encontrados."
                 salida.viajes = lista
             else:
-                salida.estatus = "OK"
+                salida.estatus = "ERROR"
                 salida.mensaje = "No se encontraron viajes con los criterios dados."
         except Exception as e:
             print("Error en consultaAuto:", e)
             salida.estatus = "ERROR"
             salida.mensaje = "Error al consultar por auto."
-
         return salida
