@@ -5,15 +5,15 @@
   "nombre": "Gasolinera Chuy Mora",
   "municipio": "Morelia",
   "estado": "Michoacan",
-  "direccion": "La rinconada",
+  "direccion": "Av Francisco I. Madero Pte 1145, Centro histórico de Morelia",
   "combustibles": [
     {
-      "nombre": "Gasolina Magna",
-      "precio": 23.91
+      "nombre": "Magna",
+      "precio": 25.55
     },
     {
-      "nombre": "Gasolina Premium",
-      "precio": 25.59
+      "nombre": "Premium",
+      "precio": 28.55
     }
   ],
   "estatus": true
@@ -25,7 +25,7 @@
   "nombre": "Gasolinera Uruapan Av",
   "municipio": "Uruapan",
   "estado": "Michoacan",
-  "direccion": "Uruapan av 203",
+  "direccion": " Carápan - Uruapan",
   "combustibles": [
     {
       "nombre": "Gasolina Magna",
@@ -36,7 +36,8 @@
       "precio": 24.14
     }
   ],
-  "estatus": true
+  "estatus": false,
+  "motivoBaja": "Fue clausurada"
 },
 {
   "_id": {
@@ -94,6 +95,46 @@
     {
       "nombre": "Gasolina Premium",
       "precio": 24.9
+    }
+  ],
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "68326d030da22ef960da4eb1"
+  },
+  "nombre": "Pemex",
+  "municipio": "Zamora de Hidalgo",
+  "estado": "Michoacan",
+  "direccion": "Carretera Nacional Morelia-Zamora Km. 142",
+  "combustibles": [
+    {
+      "nombre": "Magna",
+      "precio": 23.5
+    },
+    {
+      "nombre": "Premium",
+      "precio": 27.8
+    }
+  ],
+  "estatus": true
+},
+{
+  "_id": {
+    "$oid": "683f5e21cf4699b7c8f72b1e"
+  },
+  "nombre": "Gasolinera Ixtlan",
+  "municipio": "Ixtlan de los Hervores",
+  "estado": "Michoacan",
+  "direccion": " La Col del Géiser",
+  "combustibles": [
+    {
+      "nombre": "Magna",
+      "precio": 25.26
+    },
+    {
+      "nombre": "Premium",
+      "precio": 27.55
     }
   ],
   "estatus": true

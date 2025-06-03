@@ -1,0 +1,37 @@
+BITACORA VIEW
+$LOOKUP
+{
+  from: "gasolineras",
+  localField: "recargasCombustible.gasolinera",
+  foreignField: "_id",
+  as: "gas"
+}
+$UNWIND
+{
+  path: "$gas"
+}
+$PROJECT
+{
+  origen: 1,
+  destino: 1,
+  litrosGas: 1,
+  costo: 1,
+  kilometrosRecorridos: 1,
+  recargasCombustible: {
+    $map: {
+      input: "$recargasCombustible",
+      as: "rc",
+      in: {
+        gasolinera: "$gas.nombre",
+        cantidadLitros: "$$rc.cantidadLitros",
+        tipoCombustible: "$$rc.tipoCombustible",
+        precioLitro: "$$rc.precioLitro",
+        subtotal: "$$rc.subtotal",
+        rendimientoKml: "$$rc.rendimientoKml"
+      }
+    }
+  },
+  fecha: 1,
+  rendimientoLitro: 1,
+  _id: 0
+}

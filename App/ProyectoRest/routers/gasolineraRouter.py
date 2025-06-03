@@ -1,7 +1,7 @@
 from fastapi import APIRouter,Request, Depends, HTTPException
 
 from dao.gasolinerasDao import GasolineraDAO
-from model.gasolineraModel import GasolineraInsert, GasolineraBaja, GasolineraSalida
+from model.gasolineraModel import GasolineraInsert, GasolineraBaja, GasolineraSalida, Combustibles
 from model.usuariosModel import Salida, UsuarioSalida
 from routers.usuariosRouter import validarUsuario
 
@@ -9,10 +9,19 @@ router = APIRouter(prefix="/gasolineras",tags=["Gasolineras"])
 
 @router.post("/", summary="Agregar Gasolinera", response_model=Salida)
 async def agregarGasolinera(gasolina:GasolineraInsert,request: Request, respuesta:UsuarioSalida=Depends(validarUsuario)) -> Salida:
+    usuario = respuesta.usuario.tipo
+    if (respuesta.estatus == 'OK' and usuario == 'Administrador'):
+        gasDao = GasolineraDAO(request.app.db)
+        return gasDao.agregarGasolinera(gasolina)
+    else:
+        raise HTTPException(status_code=404, detail="Sin autorizacion.")
+
+@router.post("/combustible/{idGas}", summary="Agregar Combustible a Gasolinera", response_model=Salida)
+async def agregarCombustible(idGas:str, combustible:Combustibles,request: Request, respuesta:UsuarioSalida=Depends(validarUsuario)) -> Salida:
     usuario = respuesta.usuario
     if (respuesta.estatus == 'OK' and usuario.tipo == 'Administrador'):
         gasDao = GasolineraDAO(request.app.db)
-        return gasDao.agregarGasolinera(gasolina)
+        return gasDao.agregarCombustible(idGas, combustible)
     else:
         raise HTTPException(status_code=404, detail="Sin autorizacion.")
 @router.put("/{idGas}/modificar", summary="Actualizar Gasolinera", response_model=Salida)

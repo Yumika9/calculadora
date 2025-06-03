@@ -2,7 +2,7 @@
 from datetime import datetime
 
 from model.bitacoraModel import BitacoraInsert, RecargasCombustible
-from model.gasolineraModel import GasolineraInsert, GasolineraBaja, GasolineraSalida
+from model.gasolineraModel import GasolineraInsert, GasolineraBaja, GasolineraSalida, Combustibles
 from model.usuariosModel import Salida
 from fastapi.encoders import jsonable_encoder
 from bson import  ObjectId
@@ -25,26 +25,59 @@ class GasolineraDAO:
         try:
             self.db.gasolineras.insert_one(jsonable_encoder(gasolinera))
             salida.estatus = "OK"
-            salida.mensaje = "Gasolinera agregada con exito. "
+            salida.mensaje = "Gasolinera agregada con exito."
         except Exception as e:
             print(e)
             salida.estatus = "ERROR"
             salida.mensaje = "Error al agregar una nueva gasolinera, consulta al administrador."
         return salida
+    def agregarCombustible(self,idGas:str, combustible:Combustibles ):
+        salida = Salida(estatus="", mensaje="")
+        try:
+            estado=self.db.gasolineraView.find_one({"idGasolinera":idGas, "estatus": True})
+            if estado:
+                self.db.gasolineras.update_one({"_id": ObjectId(idGas)},{"$push":
+                                                                             {"combustibles":{
+                                                                                 "nombre":combustible.nombre,
+                                                                                 "precio":combustible.precio
+                                                                             }
+                                                                        }})
+                salida.estatus = "OK"
+                salida.mensaje = "Combustible agregado con exito."
+            else:
+                salida.estatus = "ERROR"
+                salida.mensaje = "La gasolinera no existe/ esta inactiva."
+        except Exception as e:
+            print(e)
+            salida.estatus = "ERROR"
+            salida.mensaje = "Error al añadir nuevo combustible, consulta al administrador."
+        return salida
 
     def modificarGasolinera(self,idGas:str, gasolinera: GasolineraInsert):
         salida = Salida(estatus="", mensaje="")
         try:
-            identificador = self.db.gasolineras.find_one({"_id":ObjectId(idGas), "estatus": True})
-            if identificador:
-                    self.db.gasolineras.update_one( {"_id": ObjectId(idGas)},
-                                             {"$set": {"nombre":gasolinera.nombre,
-                                                       "municipio":gasolinera.municipio,
-                                                       "estado":gasolinera.estado,
-                                                       "direccion":gasolinera.direccion,
-                                                       "combustibles":[c.dict() for c in gasolinera.combustibles]}})
-                    salida.estatus = "OK"
-                    salida.mensaje = "Gasolinera actualizada con exito"
+            estado = self.db.gasolineras.find_one({"_id":ObjectId(idGas), "estatus": True})
+            if estado:
+                gas = {}
+                gas["nombre"] = estado["nombre"] if gasolinera.nombre == "string" else gasolinera.nombre
+                gas["municipio"] = estado["municipio"] if gasolinera.municipio == "string" else gasolinera.municipio
+                gas["estado"] = estado["estado"] if gasolinera.estado == "string" else gasolinera.estado
+                gas["direccion"] = estado["direccion"] if gasolinera.direccion == "string" else gasolinera.direccion
+
+                # Filtrar combustibles válidos
+                combustiblesV = [
+                    c for c in gasolinera.combustibles
+                    if c.nombre != "string" and c.precio > 0
+                ]
+                if combustiblesV:
+                    gas["combustibles"] = jsonable_encoder(combustiblesV)
+                else:
+                    gas["combustibles"] = estado["combustibles"]
+                #Se actualiza.
+                self.db.gasolineras.update_one( {"_id": ObjectId(idGas)},
+                                             {"$set": gas})
+                salida.estatus = "OK"
+                salida.mensaje = "Gasolinera actualizada con exito"
             else:
                 salida.estatus = "ERROR"
                 salida.mensaje = "El Gasolinera no existe o esta inactivo."

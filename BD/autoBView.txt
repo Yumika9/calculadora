@@ -1,0 +1,47 @@
+autoBView
+$PROJECT
+{
+  idBitacora: {
+    $toString: "$_id"
+  },
+  origen: 1,
+  destino: 1,
+  auto: 1,
+  litrosGas: 1,
+  costo: 1,
+  kilometrosRecorridos: 1,
+  recargasCombustible: 1,
+  fecha: 1,
+  rendimientoLitro: 1,
+  _id: 0
+}
+$LOOKUP
+{
+  from: "auto",
+  localField: "auto",
+  foreignField: "_id",
+  as: "auto"
+}
+$UNWIND
+{
+  path: "$auto"
+}
+$PROJECT
+{
+  origen: 1,
+  destino: 1,
+  litrosGas: 1,
+  costo: 1,
+  kilometrosRecorridos: 1,
+  fecha: 1,
+  rendimientoLitro: 1,
+  auto: {
+    marca: "$auto.marca",
+    modelo: "$auto.modelo",
+    capacidadTanque: "$auto.capacidadTanque",
+    cilindraje: "$auto.cilindraje",
+    rendimientoGasolina:
+      "$auto.rendimientoGasolina",
+    tipoCombustible: "$auto.tipoCombustible"
+  }
+}

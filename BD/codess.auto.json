@@ -5,7 +5,9 @@
   "marca": "Toyota",
   "alias": "El coyote",
   "estatus": true,
-  "usuario": "Laura Martínez",
+  "usuario": {
+    "$oid": "67d4def38be89d3af9c601bd"
+  },
   "capacidadTanque": 10,
   "cilindraje": 4,
   "modelo": "RZ1",
@@ -19,7 +21,9 @@
   "marca": "Honda",
   "alias": "El leon",
   "estatus": true,
-  "usuario": "Ana Pérez",
+  "usuario": {
+    "$oid": "67d4dead8be89d3af9c601b4"
+  },
   "capacidadTanque": 10,
   "cilindraje": 6,
   "modelo": "FGT1",
@@ -33,7 +37,9 @@
   "marca": "Ford",
   "alias": "Chola",
   "estatus": false,
-  "usuario": "Juan García",
+  "usuario": {
+    "$oid": "67d4dec68be89d3af9c601b7"
+  },
   "capacidadTanque": 10,
   "cilindraje": 8,
   "modelo": "Ranger",
@@ -47,7 +53,9 @@
   "marca": "Chevrolet",
   "alias": "Flamint Hot",
   "estatus": true,
-  "usuario": "Miguel López",
+  "usuario": {
+    "$oid": "67d4dee48be89d3af9c601bb"
+  },
   "capacidadTanque": 10,
   "cilindraje": 4,
   "modelo": "T40",
@@ -58,13 +66,48 @@
   "_id": {
     "$oid": "67d4e1208be89d3af9c601c8"
   },
-  "marca": "BMW",
-  "alias": "La Reina",
+  "marca": "FORD",
+  "alias": "La Reina del Sur",
   "estatus": true,
-  "usuario": "Sofia Rodriguez",
-  "capacidadTanque": 15,
-  "cilindraje": 8,
-  "modelo": "HGKA",
+  "usuario": {
+    "$oid": "67d4ded78be89d3af9c601b9"
+  },
+  "capacidadTanque": 0,
+  "cilindraje": 0,
+  "modelo": "Sedan",
   "rendimientoGasolina": "11.5k/l",
   "tipoCombustible": "Gasolina"
+},
+{
+  "_id": {
+    "$oid": "6830ffe23002c7b3e3cc9fde"
+  },
+  "usuario": {
+    "$oid": "67d4dead8be89d3af9c601b4"
+  },
+  "marca": "FORD",
+  "modelo": "Sedan",
+  "alias": "Toro",
+  "cilindraje": 4,
+  "capacidadTanque": 10,
+  "rendimientoGasolina": "8k/l",
+  "tipoCombustible": "Gasolina",
+  "estatus": false,
+  "motivoBaja": "Me lo robaron"
+},
+{
+  "_id": {
+    "$oid": "683f40e2325affdc7f1e5c9e"
+  },
+  "usuario": {
+    "$oid": "67d4dead8be89d3af9c601b4"
+  },
+  "marca": "Chevrolet",
+  "modelo": "Silverado",
+  "alias": "Platina",
+  "cilindraje": 8,
+  "capacidadTanque": 15,
+  "rendimientoGasolina": "12k/l",
+  "tipoCombustible": "Gasolina",
+  "estatus": true
 }]

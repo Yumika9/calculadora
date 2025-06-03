@@ -14,7 +14,7 @@ class GasolineraInsert(BaseModel):
     estado:str
     direccion:str
     combustibles:list[Combustibles]
-    estatus: bool
+    estatus: bool =True
 
 class GasolineraBaja(BaseModel):
     motivoBaja:str

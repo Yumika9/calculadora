@@ -4,7 +4,9 @@
   },
   "origen": "Morelia",
   "destino": "Uruapan",
-  "auto": "El coyote",
+  "auto": {
+    "$oid": "67d4e0958be89d3af9c601c0"
+  },
   "litrosGas": 12.5,
   "costo": 230.91,
   "kilometrosRecorridos": 12.3,
@@ -29,7 +31,9 @@
   },
   "origen": "Uruapan",
   "destino": "Lázaro Cárdenas",
-  "auto": "El leon",
+  "auto": {
+    "$oid": "67d4e0bc8be89d3af9c601c2"
+  },
   "litrosGas": 15,
   "costo": 230.5,
   "kilometrosRecorridos": 20,
@@ -43,6 +47,16 @@
       "precioLitro": 23.5,
       "subtotal": 230.5,
       "rendimientoKml": 10.4
+    },
+    {
+      "gasolinera": {
+        "$oid": "67d4e2ff8be89d3af9c601cf"
+      },
+      "cantidadLitros": 5,
+      "tipoCombustible": "Magna",
+      "precioLitro": 23.77,
+      "subtotal": 230.77,
+      "rendimientoKml": 10.2
     }
   ],
   "rendimientoLitro": "10.4k/L",
@@ -54,7 +68,9 @@
   },
   "origen": "Morelia",
   "destino": "Zamora",
-  "auto": "El coyote",
+  "auto": {
+    "$oid": "67d4e0958be89d3af9c601c0"
+  },
   "litrosGas": 15,
   "costo": 230.91,
   "kilometrosRecorridos": 20,
@@ -79,7 +95,9 @@
   },
   "origen": "Pátzcuaro",
   "destino": "Morelia",
-  "auto": "Flamint Hot",
+  "auto": {
+    "$oid": "67d4e1068be89d3af9c601c6"
+  },
   "litrosGas": 10,
   "costo": 230.91,
   "kilometrosRecorridos": 15,
@@ -104,7 +122,9 @@
   },
   "origen": "Zamora",
   "destino": "Uruapan",
-  "auto": "La Reina",
+  "auto": {
+    "$oid": "67d4e1208be89d3af9c601c8"
+  },
   "litrosGas": 5,
   "costo": 230.85,
   "kilometrosRecorridos": 7,
@@ -122,4 +142,52 @@
   ],
   "rendimientoLitro": "7.5k/L",
   "fecha": "2023-10-31T12:00:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "682546484f1ce5d880a88b78"
+  },
+  "origen": "Zamora",
+  "destino": "Purepero",
+  "auto": {
+    "$oid": "67d4e0958be89d3af9c601c0"
+  },
+  "litrosGas": 5,
+  "costo": 120,
+  "kilometrosRecorridos": 48,
+  "recargasCombustibles": [
+    {
+      "gasolinera": "67d4e30b8be89d3af9c601d1",
+      "cantidadLitros": 5,
+      "tipoCombustible": "Magna",
+      "precioLitro": 23,
+      "subtotal": 120,
+      "rendimientoKml": 8
+    }
+  ],
+  "fecha": "2025-05-14T19:41:28.849886",
+  "rendimientoLitro": "8.10k/l"
+},
+{
+  "_id": {
+    "$oid": "68347d67ae02519c20e28b08"
+  },
+  "origen": "Zamora",
+  "destino": "Guadalajara",
+  "auto": "67d4e0958be89d3af9c601c0",
+  "litrosGas": 10,
+  "costo": 250,
+  "kilometrosRecorridos": 25,
+  "recargasCombustibles": [
+    {
+      "gasolinera": "67d4e2dc8be89d3af9c601cb",
+      "cantidadLitros": 10,
+      "tipoCombustible": "Magna",
+      "precioLitro": 25,
+      "subtotal": 250,
+      "rendimientoKml": 11
+    }
+  ],
+  "fecha": "2025-05-26T08:40:39.571588",
+  "rendimientoLitro": "11k/l"
 }]

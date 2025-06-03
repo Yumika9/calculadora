@@ -1,0 +1,14 @@
+GASOLINERA VIEW
+$PROJECT
+{
+  idGasolinera: {
+    $toString: "$_id"
+  },
+  nombre: 1,
+  municipio: 1,
+  estado: 1,
+  direccion: 1,
+  combustibles: 1,
+  estatus: 1,
+  _id: 0
+}

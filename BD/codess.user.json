@@ -4,7 +4,8 @@
   },
   "nombre": "Ana Pérez",
   "email": "ana.perez@example.com",
-  "password": "P@$$wOrd1",
+  "password": "maruchannn",
+  "tipo": "Usuario",
   "estatus": true
 },
 {
@@ -13,7 +14,8 @@
   },
   "nombre": "Juan García",
   "email": "juan.garcia@example.com",
-  "password": "jGarcia123",
+  "password": "maruchann",
+  "tipo": "Usuario",
   "estatus": true
 },
 {
@@ -22,7 +24,8 @@
   },
   "nombre": "Sofia Rodriguez",
   "email": "sofia.rodriguez@example.com",
-  "password": "SofiaR123",
+  "password": "123456789",
+  "tipo": "Usuario",
   "estatus": true
 },
 {
@@ -31,7 +34,8 @@
   },
   "nombre": "Miguel López",
   "email": "miguel.lopez@example.com",
-  "password": "MiguelLopez2023",
+  "password": "12345678910",
+  "tipo": "Administrador",
   "estatus": true
 },
 {
@@ -39,7 +43,39 @@
     "$oid": "67d4def38be89d3af9c601bd"
   },
   "nombre": "Laura Martínez",
-  "email": "laura.martinez@example.com",
+  "email": "lauraGF@gmail.com",
   "password": "LauraM987",
+  "tipo": "Administrador",
   "estatus": true
+},
+{
+  "_id": {
+    "$oid": "6823f6945b0e78e6f1019c69"
+  },
+  "nombre": "Juan Marquez",
+  "email": "juan@gmail.com",
+  "password": "123456789",
+  "tipo": "Usuario",
+  "estatus": false,
+  "motivoBaja": "Acoso"
+},
+{
+  "_id": {
+    "$oid": "683477f1acbb32580ee73cdb"
+  },
+  "nombre": "Juan Torres",
+  "email": "juan.garcia@gmail.com",
+  "password": "fogataluz",
+  "estatus": true,
+  "tipo": "Administrador"
+},
+{
+  "_id": {
+    "$oid": "683b9527ba19b561c75eea5a"
+  },
+  "nombre": "Eduardo Miranda",
+  "email": "lalomrd@gmail.com",
+  "password": "sopadepollo",
+  "estatus": true,
+  "tipo": "Usuario"
 }]

@@ -22,22 +22,23 @@ async def agregarAuto(idUser:str, autos:AutoInsert,request: Request, respuesta:U
 @router.put("/{idAuto}/modificar", summary="Editar Auto", response_model=Salida)
 async def modificarAuto(idAuto:str,auto:AutoInsert,request: Request, respuesta:UsuarioSalida=Depends(validarUsuario)) -> Salida:
     usuario = respuesta.usuario
-    if (respuesta.estatus == 'OK' and usuario.tipo == 'Usuario'):
+    if (respuesta.estatus == 'OK' and usuario.tipo == 'Usuario' or usuario.tipo == 'Administrador'):
         autoDao = AutoDAO(request.app.db)
-        return autoDao.modificarAuto(idAuto, auto )
+        return autoDao.modificarAuto(usuario.idUsuario,usuario.tipo,idAuto, auto )
     else:
         raise HTTPException(status_code=404, detail="Sin autorizacion.")
 
 @router.delete("/{idAuto}/eliminar",response_model=Salida,summary="Eliminar Auto")
 async def eliminarAuto(idAuto:str,autoB:AutoBaja,request: Request, respuesta:UsuarioSalida=Depends(validarUsuario)) -> Salida:
-    usuario = respuesta.usuario
-    if (respuesta.estatus == 'OK' and usuario.tipo == 'Administrador'):
+    idUser=respuesta.usuario.idUsuario
+    tipor=respuesta.usuario.tipo
+    if (respuesta.estatus == 'OK' and tipor == 'Administrador' or tipor=="Usuario"):
         autoDao = AutoDAO(request.app.db)
-        return autoDao.eliminarAuto(idAuto, autoB)
+        return autoDao.eliminarAuto(idUser,tipor,idAuto, autoB)
     else:
         raise HTTPException(status_code=404, detail="Sin autorizacion.")
 
-@router.get("/auto/consulta", response_model=AutoSalida, summary="Consulta General")
+@router.get("/consultaGeneral", response_model=AutoSalida, summary="Consulta General")
 async def consultaGeneral(request: Request, respuesta:UsuarioSalida=Depends(validarUsuario))->AutoSalida:
     usuario = respuesta.usuario
     if (respuesta.estatus == 'OK' and usuario.tipo == 'Administrador'):
@@ -46,11 +47,12 @@ async def consultaGeneral(request: Request, respuesta:UsuarioSalida=Depends(vali
     else:
         raise HTTPException(status_code=404, detail="Sin autorizacion.")
 
-@router.get("/auto/{idAuto}", response_model=AutoSalida, summary="Consulta Individual")
+@router.get("/consulta/{idAuto}", response_model=AutoSalida, summary="Consulta Individual")
 async def consultaIndividual(idAuto:str,request: Request, respuesta:UsuarioSalida=Depends(validarUsuario))->AutoSalida:
-    usuario = respuesta.usuario
-    if (respuesta.estatus == 'OK' and usuario.tipo == 'Administrador' or usuario.tipo == 'Usuario'):
+    idUser = respuesta.usuario.idUsuario
+    tipor = respuesta.usuario.tipo
+    if (respuesta.estatus == 'OK' and tipor == 'Administrador' or tipor == 'Usuario'):
         autoDao = AutoDAO(request.app.db)
-        return autoDao.consultaIndividual(idAuto)
+        return autoDao.consultaIndividual(idUser,tipor,idAuto)
     else:
         raise HTTPException(status_code=404, detail="Sin autorizacion.")
